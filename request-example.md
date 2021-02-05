@@ -12,6 +12,6 @@
 
 ## Apache Benchmark (AB) Test 
 ```
-ab -p post_loc.txt -T application/json -H 'Authorization: Token abcd1234' -c 10 -n 2000 http://example.com/api/v1/locations/
+ab -p post-example.txt -T application/json -H 'Authorization: Token abcd1234' -c 10 -n 2000 http://192.168.56.66:8000/graphql
 ```
 

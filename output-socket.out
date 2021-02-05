@@ -1,0 +1,210 @@
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        swoole-http-server
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.343 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      159000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    2914.47 [#/sec] (mean)
+Time per request:       34.312 [ms] (mean)
+Time per request:       0.343 [ms] (mean, across all concurrent requests)
+Transfer rate:          452.54 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   5.2      0      22
+Processing:    16   31   4.5     31      44
+Waiting:       14   31   4.7     31      44
+Total:         20   33   7.1     32      65
+
+Percentage of the requests served within a certain time (ms)
+  50%     32
+  66%     33
+  75%     34
+  80%     34
+  90%     40
+  95%     48
+  98%     61
+  99%     63
+ 100%     65 (longest request)
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        swoole-http-server
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.309 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      159000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    3235.88 [#/sec] (mean)
+Time per request:       30.904 [ms] (mean)
+Time per request:       0.309 [ms] (mean, across all concurrent requests)
+Transfer rate:          502.45 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   3.6      0      13
+Processing:    11   27   6.0     28      41
+Waiting:        3   27   6.9     28      41
+Total:         17   29   4.0     29      41
+
+Percentage of the requests served within a certain time (ms)
+  50%     29
+  66%     30
+  75%     30
+  80%     30
+  90%     36
+  95%     38
+  98%     39
+  99%     39
+ 100%     41 (longest request)
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        swoole-http-server
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.480 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      159000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    2081.45 [#/sec] (mean)
+Time per request:       48.044 [ms] (mean)
+Time per request:       0.480 [ms] (mean, across all concurrent requests)
+Transfer rate:          323.19 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    3   6.5      0      24
+Processing:    11   42   9.2     44      57
+Waiting:        2   41  11.2     44      57
+Total:         28   45   4.8     45      57
+
+Percentage of the requests served within a certain time (ms)
+  50%     45
+  66%     47
+  75%     49
+  80%     49
+  90%     51
+  95%     53
+  98%     55
+  99%     55
+ 100%     57 (longest request)
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        swoole-http-server
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.500 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      159000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    1999.90 [#/sec] (mean)
+Time per request:       50.003 [ms] (mean)
+Time per request:       0.500 [ms] (mean, across all concurrent requests)
+Transfer rate:          310.53 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    5   7.1      0      23
+Processing:    17   42  12.3     45      62
+Waiting:        6   41  14.5     45      62
+Total:         33   48   7.3     48      62
+
+Percentage of the requests served within a certain time (ms)
+  50%     48
+  66%     51
+  75%     54
+  80%     55
+  90%     57
+  95%     59
+  98%     61
+  99%     61
+ 100%     62 (longest request)
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        swoole-http-server
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /
+Document Length:        11 bytes
+
+Concurrency Level:      100
+Time taken for tests:   0.529 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      159000 bytes
+HTML transferred:       11000 bytes
+Requests per second:    1890.95 [#/sec] (mean)
+Time per request:       52.884 [ms] (mean)
+Time per request:       0.529 [ms] (mean, across all concurrent requests)
+Transfer rate:          293.61 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    5   7.0      0      23
+Processing:    16   46  15.0     49      73
+Waiting:        5   45  17.0     49      73
+Total:         28   51   9.5     52      73
+
+Percentage of the requests served within a certain time (ms)
+  50%     52
+  66%     56
+  75%     59
+  80%     60
+  90%     63
+  95%     66
+  98%     69
+  99%     71
+ 100%     73 (longest request)
