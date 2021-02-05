@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Todo\Resolver;
 
@@ -22,5 +24,10 @@ class Query
     public function __invoke()
     {
         return $this->todos->find($this->criteria);
+    }
+
+    public function getAllData()
+    {
+        return $this->todos;
     }
 }

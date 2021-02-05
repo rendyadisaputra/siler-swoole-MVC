@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Todo;
 
@@ -16,7 +18,7 @@ class InMemoryTodos implements Todos
         }
 
         if ($criteria instanceof FindOne) {
-            return $this->memory[$criteria->getId()] ?? null;
+            return $this->memory[$criteria->getId()] ?? [];
         }
 
         return [];
@@ -29,10 +31,12 @@ class InMemoryTodos implements Todos
             $todo['id'] = sizeof($this->memory) + 1;
             $todo['done'] = false;
             $this->memory[$todo['id']] = $todo;
+
             return $todo;
         } else {
             // NOTE: Is an update
             $this->memory[$todo['id']] = array_merge($this->memory[$todo['id']], $todo);
+
             return $this->memory[$todo['id']];
         }
     }
