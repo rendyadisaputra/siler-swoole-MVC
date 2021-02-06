@@ -1,8 +1,8 @@
-# Swoole + Siler with High Performance
+# Swoole + Siler , High Performance PHP Server
 
 ## Environtments
 + MongoDB
-+ PHP7.3
++ PHP 7.3+
 + Swoole PHP Extensions
 
 Building REST API Development on top of Swoole + Siler
@@ -11,4 +11,9 @@ Building REST API Development on top of Swoole + Siler
 go to command line
 ```
 #> php rest-run.php
+```
+
+## Example of REST API
+```
+GET http://192.168.56.66:9501/members
 ```

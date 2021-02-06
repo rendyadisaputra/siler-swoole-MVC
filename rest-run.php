@@ -50,7 +50,7 @@ $handler = function ($req, $res) use (&$router) {
          * $e->getMessage(), $e->getTrace()
          */
 
-        // var_dump($e->getMessage(), json_encode($e->getTrace()[0]), JSON_PRETTY_PRINT);
+        var_dump( $e->getMessage(), json_encode($e->getTrace()[0]), JSON_PRETTY_PRINT);
         Swoole\json(['Error' => 'Something is wrong broh.. '], 500);
     }
 };

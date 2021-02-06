@@ -44,12 +44,18 @@ class Root
 
     public function sendResponse($value, int $code = 200, $response = 'json'): void
     {
+        $headers = [
+            'Access-Control-Allow-Origin'=> '*',
+            'Access-Control-Allow-Headers'=>'Content-Type, Authorization, authorization, api_key',
+            'Access-Control-Allow-Methods'=> 'GET, POST, OPTIONS, PUT, DELETE',
+            'Server' => 'Swiler'
+        ];
         if ($response == 'json' && is_array($value)) {
-            Swoole\json($value, $code);
+            Swoole\json($value, $code , $headers);
         } elseif ($response == 'json' && is_string($value)) {
-            Swoole\json([$value], $code);
+            Swoole\json([$value], $code , $headers);
         } else {
-            Swooole\emit($value, $code);
+            Swooole\emit($value, $code , $headers);
         }
     }
 }

@@ -15,7 +15,8 @@
     "leocavalcante/siler": "^1.7",
     "webonyx/graphql-php": "^v14.1",
     "twig/twig": "^3.2",
-    "monolog/monolog": "^2.2"
+    "monolog/monolog": "^2.2",
+    "firebase/php-jwt": "dev-master"
   },
   "require-dev": {
     "swoole/ide-helper": "^4.5"
