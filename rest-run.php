@@ -25,22 +25,33 @@ $handler = function ($req, $res) use (&$router) {
     $fileExt1 = $dir.$parseSlice.'.'.($requestMethod).'.php';
     $fileExt2 = $dir.($parseSlice == '' ? '' : $parseSlice.'/').'index'.'.'.($requestMethod).'.php';
 
-    if (is_file($fileExt1)) {
-        if (!isset($router[$fileExt1])) {
-            include_once $fileExt1;
-            $router[$fileExt1] = $run;
-        }
+    try {
+        if (is_file($fileExt1)) {
+            if (!isset($router[$fileExt1])) {
+                include_once $fileExt1;
+                $router[$fileExt1] = $run;
+            }
 
-        $router[$fileExt1]();
-    } elseif (is_file($fileExt2)) {
-        if (!isset($router[$fileExt2])) {
-            include_once $fileExt2;
-            $router[$fileExt2] = $run;
-        }
+            $router[$fileExt1]();
+        } elseif (is_file($fileExt2)) {
+            if (!isset($router[$fileExt2])) {
+                include_once $fileExt2;
+                $router[$fileExt2] = $run;
+            }
 
-        $router[$fileExt2]();
-    } else {
-        Swoole\emit('Not found', 404);
+            $router[$fileExt2]();
+        } else {
+            Swoole\emit('Not found', 404);
+        }
+    } catch (Exception $e) {
+        /*
+         * Logging error is here
+         *
+         * $e->getMessage(), $e->getTrace()
+         */
+
+        // var_dump($e->getMessage(), json_encode($e->getTrace()[0]), JSON_PRETTY_PRINT);
+        Swoole\json(['Error' => 'Something is wrong broh.. '], 500);
     }
 };
 

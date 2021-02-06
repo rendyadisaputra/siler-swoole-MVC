@@ -10,8 +10,6 @@ class Model extends Root
 
     public static function __callStatic($name, $arguments)
     {
-        $n = new Model();
-
         return (new Model())->$name()->init();
     }
 

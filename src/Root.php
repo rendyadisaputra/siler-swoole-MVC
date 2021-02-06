@@ -8,6 +8,7 @@ class Root
 {
     private $calledClass = '';
     private $dir;
+    // private $routedMethod = [];
 
     public function __call($name, $arguments)
     {
@@ -23,11 +24,11 @@ class Root
         } elseif ($this->calledClass != '') {
             $file = ($this->dir).'/'.($this->calledClass).'/'.$name.'.php';
             if (is_file($file)) {
-                include_once $file;
+                include $file;
 
-                return $name($this);
+                return $$name($this);
             } else {
-                Swoole\json('file not found '.($file), 501);
+                Swoole\json('function file not found '.($file), 501);
             }
         }
 

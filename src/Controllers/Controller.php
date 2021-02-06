@@ -8,8 +8,6 @@ class Controller extends Root
 {
     public static function __callStatic($name, $arguments)
     {
-        $n = new Controller();
-
         return (new Controller())->$name();
     }
 
