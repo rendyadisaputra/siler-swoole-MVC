@@ -70,7 +70,7 @@ class MongoModel extends Root
                     'error_code' => $this->error_code,
                 ];
 
-            throw new Exception($returnError['error'], $returnError['error_code']);
+            throw new \Exception($returnError['error'], $returnError['error_code']);
         } else {
             return [
                     'result' => $result,
@@ -105,7 +105,7 @@ class MongoModel extends Root
     //                     'status' => 'success',
     //                     '_id' => $id,
     //                 ];
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
 
@@ -163,7 +163,7 @@ class MongoModel extends Root
     //                     'status' => 'success',
     //                     '_id' => $id,
     //                 ];
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
 
@@ -178,7 +178,7 @@ class MongoModel extends Root
 
         // var_dump("exit", );
         $ipAddr = \Siler\Swoole\request()->server['remote_addr'];
-       
+
         try {
             $bulk = new \MongoDB\Driver\BulkWrite(['upserted' => true]);
             $dateNow = date('Y-m-d H:i:s');
@@ -189,67 +189,68 @@ class MongoModel extends Root
                 $data['created_by'] = $this->currentUser;
                 $data['updated_by'] = $this->currentUser;
             }
-            
+
             $data['created_at'] = $ipAddr;
             $data['updated_at'] = $ipAddr;
 
             $id = $bulk->insert($data);
-            $table = $this->selectedDB.".".$this->collectionName;
+            $table = $this->selectedDB.'.'.$this->collectionName;
             $result = $this->MongoClient->executeBulkWrite($table, $bulk);
             $dbRes = [
                             'status' => 'success',
                             '_id' => $id,
                     ];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 500);
         }
 
         return $this->sendResult($dbRes);
     }
 
-    // public function DBupdate($set_based_on, $new_value, $multi = true, $set = '$set', $customPushPull = false, $upsert = true)
-    // {
-    //     if ($this->error !== false) {
-    //         return $this->sendResult();
-    //     }
+    public function DBUpdate($set_based_on, $new_value, $multi = true, $set = '$set', $customPushPull = false, $upsert = true)
+    {
+        if ($this->error !== false) {
+            return $this->sendResult();
+        }
 
-    //     try {
-    //         $bulk = new \MongoDB\Driver\BulkWrite(['upserted' => $upsert]);
+        try {
+            $bulk = new \MongoDB\Driver\BulkWrite(['upserted' => $upsert]);
 
-    //         if (isset($new_value['_id'])) {
-    //             unset($new_value['_id']);
-    //         }
+            if (isset($new_value['_id'])) {
+                unset($new_value['_id']);
+            }
 
-    //         $multi = $multi ? ['multi' => true] : [];
+            $multi = $multi ? ['multi' => true] : [];
+            $ipAddr = \Siler\Swoole\request()->server['remote_addr'];
+            if (empty($customPushPull)) {
+                $dateNow = date('Y-m-d H:i:s');
+                $dateNow = $this->convertToMongoDateTime($dateNow);
+                $new_value['released_date'] = $dateNow;
+                $new_value['updated_date'] = $dateNow;
 
-    //         if (empty($customPushPull)) {
-    //             $dateNow = date('Y-m-d H:i:s');
-    //             $dateNow = $this->convertToMongoDateTime($dateNow);
-    //             $new_value['released_date'] = $dateNow;
-    //             $new_value['updated_date'] = $dateNow;
+                if (!empty($this->currentUser)) {
+                    $new_value['updated_by'] = $this->currentUser;
+                }
 
-    //             if (!empty($this->currentUser)) {
-    //                 $new_value['updated_by'] = $this->currentUser;
-    //             }
+                $new_value['updated_at'] = $ipAddr;
 
-    //             $new_value['updated_at'] = getClientIpAddr();
+                $id = $bulk->update($set_based_on, [$set => $new_value], $multi);
+            } else {
+                $id = $bulk->update($set_based_on, $new_value, $multi);
+            }
+            $table = $this->selectedDB.'.'.$this->collectionName;
 
-    //             $id = $bulk->update($set_based_on, [$set => $new_value], $multi);
-    //         } else {
-    //             $id = $bulk->update($set_based_on, $new_value, $multi);
-    //         }
+            $result = $this->MongoClient->executeBulkWrite($table, $bulk);
+            $dbRes = [
+                        'status' => 'success',
+                        '_id' => $id,
+                    ];
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
+        }
 
-    //         $result = $this->MongoClient->executeBulkWrite($this->table, $bulk);
-    //         $dbRes = [
-    //                     'status' => 'success',
-    //                     '_id' => $id,
-    //                 ];
-    //     } catch (Exception $e) {
-    //         return $this->sendError($e->getMessage(), 500);
-    //     }
-
-    //     return $this->sendResult($dbRes);
-    // }
+        return $this->sendResult($dbRes);
+    }
 
     // public function DBdelete($_id)
     // {
@@ -268,10 +269,10 @@ class MongoModel extends Root
     //         foreach ($_id as $key => $value) {
     //             $_id[$key] = $this->convertToObjectId($value);
     //         }
-    //         $returnResult = $this->DBupdate(['_id' => ['$in' => $_id]], $setData);
+    //         $returnResult = $this->DBUpdate(['_id' => ['$in' => $_id]], $setData);
     //     } else {
     //         $_id = $this->convertToObjectId($_id);
-    //         $returnResult = $this->DBupdate(['_id' => $_id], $setData);
+    //         $returnResult = $this->DBUpdate(['_id' => $_id], $setData);
     //     }
 
     //     return $returnResult;
@@ -289,7 +290,7 @@ class MongoModel extends Root
     //     }
     //     $setData[$targetArray.'.$.deleted_at'] = getClientIpAddr();
 
-    //     $returnResult = $this->DBupdate($condition, $setData);
+    //     $returnResult = $this->DBUpdate($condition, $setData);
 
     //     return $returnResult;
     // }
@@ -308,7 +309,7 @@ class MongoModel extends Root
     //     $setData[$targetArray.'.$.updated_at'] = getClientIpAddr();
 
     //     // var_dump(json_encode($condition, JSON_PRETTY_PRINT), "\n\r\n\r", json_encode($setData, JSON_PRETTY_PRINT));
-    //     $returnResult = $this->DBupdate($condition, $setData);
+    //     $returnResult = $this->DBUpdate($condition, $setData);
 
     //     return $returnResult;
     // }
@@ -323,7 +324,7 @@ class MongoModel extends Root
     //     }
     //     $setData[$targetArray.'.$.restored_at'] = getClientIpAddr();
 
-    //     $returnResult = $this->DBupdate($condition, $setData);
+    //     $returnResult = $this->DBUpdate($condition, $setData);
 
     //     return $returnResult;
     // }
@@ -342,7 +343,7 @@ class MongoModel extends Root
     // //         $dbRes  = [ '_id'=> $id];
 
     // //     }
-    // //     catch(Exception $e){
+    // //     catch\Exception $e){
     // //         return $this->sendError($e->getMessage(), 500);
 
     // //     }
@@ -375,7 +376,7 @@ class MongoModel extends Root
 
     //         $query = new \MongoDB\Driver\Query($filter, $options);
     //         $rows = $this->MongoClient->executeQuery($this->table, $query);
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
 
@@ -420,12 +421,27 @@ class MongoModel extends Root
     //         $command = new \MongoDB\Driver\Command($aggregate);
 
     //         $result = $this->MongoClient->executeCommand($this->db, $command);
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
 
     //     return $this->sendResult($this->clear_result_format($result));
     // }
+
+    public function findBy(array $matchIndicator, $multi = false)
+    {
+        if (isset($matchIndicator['_id']) && is_string(($matchIndicator['_id']))) {
+            $matchIndicator['_id'] = $this->convertToObjectId($matchIndicator['_id']);
+        }
+        $pipeline = [
+            ['$match' => $matchIndicator],
+        ];
+        if ($multi == false) {
+            $pipeline[] = ['$limit' => 1];
+        }
+
+        return $this->DBaggregate($pipeline);
+    }
 
     public function DBaggregate($pipeline, $checkDeletedRow = false, $clearResultFormat = true)
     {
@@ -451,7 +467,7 @@ class MongoModel extends Root
 
             // var_dump($this->collectionName);
             $result = $this->MongoClient->executeCommand($this->selectedDB, $command);
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             // var_dump('HELLO ERROR', $e);
 
             return $this->sendError($e->getMessage(), 500);
@@ -609,7 +625,7 @@ class MongoModel extends Root
     //         $opt['sort'] = $sort;
 
     //         return $this->DBFind($filter, $opt);
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
     // }
@@ -621,7 +637,7 @@ class MongoModel extends Root
     //     }
     //     try {
     //         $result = $this->DBdelete($_id);
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
 
@@ -637,8 +653,8 @@ class MongoModel extends Root
     //         $_id = $this->convertToObjectId($_id);
     //         $filter = ['_id' => $_id];
 
-    //         return $this->DBupdate($filter, $data);
-    //     } catch (Exception $e) {
+    //         return $this->DBUpdate($filter, $data);
+    //     } catch( \Exception $e) {
     //         return $this->sendError($e->getMessage(), 500);
     //     }
     // }
@@ -651,7 +667,7 @@ class MongoModel extends Root
 
     //     try {
     //         $result = $this->DBinsert($data);
-    //     } catch (Exception $e) {
+    //     } catch( \Exception $e) {
     //         return  $this->sendError($e->getMessage(), 500);
     //     }
 
@@ -668,17 +684,17 @@ class MongoModel extends Root
     //     return $array;
     // }
 
-    // public function sendError($errorMessage = '', $errorCode = false)
-    // {
-    //     if ($errorCode) {
-    //         $this->error_code = $errorCode;
-    //     }
-    //     if ($errorMessage) {
-    //         $this->error = $errorMessage;
-    //     }
+    public function sendError($errorMessage = '', $errorCode = false)
+    {
+        if ($errorCode) {
+            $this->error_code = $errorCode;
+        }
+        if ($errorMessage) {
+            $this->error = $errorMessage;
+        }
 
-    //     return $this->sendResult();
-    // }
+        return $this->sendResult();
+    }
 
     // public function convertToMongoObject($value)
     // {
@@ -857,18 +873,18 @@ class MongoModel extends Root
     //     return $respondsColumns;
     // }
 
-    // public function convertToObjectId($_id, $createNew = false)
-    // {
-    //     try {
-    //         !$createNew ?
-    //             $val = ((is_string($_id)) && (strlen($_id) == 24) && preg_match('/^[a-fA-F0-9]{24}/', $_id)) ? new  \MongoDB\BSON\ObjectId("$_id") : $_id :
-    //             $val = new  \MongoDB\BSON\ObjectId();
+    public function convertToObjectId($_id, $createNew = false)
+    {
+        try {
+            !$createNew ?
+                $val = ((is_string($_id)) && (strlen($_id) == 24) && preg_match('/^[a-fA-F0-9]{24}/', $_id)) ? new  \MongoDB\BSON\ObjectId("$_id") : $_id :
+                $val = new  \MongoDB\BSON\ObjectId();
 
-    //         return $val;
-    //     } catch (Exception $e) {
-    //         return false;
-    //     }
-    // }
+            return $val;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 
     public function convertToMongoDateTime($datetime)
     {
