@@ -25,8 +25,8 @@ class Root
             $file = ($this->dir).'/'.($this->calledClass).'/'.$name.'.php';
             if (is_file($file)) {
                 include $file;
-
-                return $$name($this);
+                
+                return $this->runResponse($$name($this, $arguments));
             } else {
                 Swoole\json('function file not found '.($file), 501);
             }
@@ -40,6 +40,10 @@ class Root
         $this->dir = $dir;
 
         return $this;
+    }
+
+     function runResponse($val){
+        return $val;
     }
 
     public function sendResponse($value, int $code = 200, $response = 'json'): void

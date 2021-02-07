@@ -10,8 +10,8 @@ class JwtToken
     {
         $tokenId = base64_encode(random_bytes(32));
         $issuedAt = time();
-        $notBefore = $issuedAt + 3;             //Adding 3 seconds
-        $expire = $notBefore + 3600*24;            // Adding 60 seconds
+        $notBefore = $issuedAt + 3;             //Adding 3 seconds, can be used only 3 seconds after token created
+        $expire = $notBefore + 3600*24;            // Adding 24 hours only
         $serverName = 'swoole-api'; // Retrieve the server name from config file
 
         /*

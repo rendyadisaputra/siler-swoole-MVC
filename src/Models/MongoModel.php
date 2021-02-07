@@ -86,7 +86,7 @@ class MongoModel extends Root
     //     }
 
     //     try {
-    //         $bulk = new MongoDB\Driver\BulkWrite();
+    //         $bulk = new \MongoDB\Driver\BulkWrite();
     //         $id = [];
 
     //         $dateNow = date('Y-m-d H:i:s');
@@ -119,7 +119,7 @@ class MongoModel extends Root
     //     }
 
     //     try {
-    //         $bulk = new MongoDB\Driver\BulkWrite();
+    //         $bulk = new \MongoDB\Driver\BulkWrite();
     //         $id = [];
 
     //         $ipAddr = getClientIpAddr();
@@ -170,39 +170,42 @@ class MongoModel extends Root
     //     return $this->sendResult($dbRes);
     // }
 
-    // public function DBinsert($data)
-    // {
-    //     if ($this->error !== false) {
-    //         return $this->sendResult();
-    //     }
+    public function DBinsert($data)
+    {
+        if ($this->error !== false) {
+            return $this->sendResult();
+        }
 
-    //     try {
-    //         $bulk = new MongoDB\Driver\BulkWrite(['upserted' => true]);
+        // var_dump("exit", );
+        $ipAddr = \Siler\Swoole\request()->server['remote_addr'];
+       
+        try {
+            $bulk = new \MongoDB\Driver\BulkWrite(['upserted' => true]);
+            $dateNow = date('Y-m-d H:i:s');
+            $dateNow = $this->convertToMongoDateTime($dateNow);
+            $data['created_date'] = $dateNow;
+            $data['updated_date'] = $dateNow;
+            if (!empty($this->currentUser)) {
+                $data['created_by'] = $this->currentUser;
+                $data['updated_by'] = $this->currentUser;
+            }
+            
+            $data['created_at'] = $ipAddr;
+            $data['updated_at'] = $ipAddr;
 
-    //         $dateNow = date('Y-m-d H:i:s');
-    //         $dateNow = $this->convertToMongoDateTime($dateNow);
-    //         $data['created_date'] = $dateNow;
-    //         $data['updated_date'] = $dateNow;
-    //         if (!empty($this->currentUser)) {
-    //             $data['created_by'] = $this->currentUser;
-    //             $data['updated_by'] = $this->currentUser;
-    //         }
-    //         $ipAddr = getClientIpAddr();
-    //         $data['created_at'] = $ipAddr;
-    //         $data['updated_at'] = $ipAddr;
+            $id = $bulk->insert($data);
+            $table = $this->selectedDB.".".$this->collectionName;
+            $result = $this->MongoClient->executeBulkWrite($table, $bulk);
+            $dbRes = [
+                            'status' => 'success',
+                            '_id' => $id,
+                    ];
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
+        }
 
-    //         $id = $bulk->insert($data);
-    //         $result = $this->MongoClient->executeBulkWrite($this->table, $bulk);
-    //         $dbRes = [
-    //                         'status' => 'success',
-    //                         '_id' => $id,
-    //                 ];
-    //     } catch (Exception $e) {
-    //         return $this->sendError($e->getMessage(), 500);
-    //     }
-
-    //     return $this->sendResult($dbRes);
-    // }
+        return $this->sendResult($dbRes);
+    }
 
     // public function DBupdate($set_based_on, $new_value, $multi = true, $set = '$set', $customPushPull = false, $upsert = true)
     // {
@@ -211,7 +214,7 @@ class MongoModel extends Root
     //     }
 
     //     try {
-    //         $bulk = new MongoDB\Driver\BulkWrite(['upserted' => $upsert]);
+    //         $bulk = new \MongoDB\Driver\BulkWrite(['upserted' => $upsert]);
 
     //         if (isset($new_value['_id'])) {
     //             unset($new_value['_id']);
@@ -332,7 +335,7 @@ class MongoModel extends Root
     // //     try
     // //     {
     // //         $id   = $set_based_on;
-    // //         $bulk = fnew MongoDB\Driver\BulkWrite;
+    // //         $bulk = fnew \MongoDB\Driver\BulkWrite;
     // //         $bulk->delete($id);
 
     // //         $result = $this->MongoClient->executeBulkWrite($this->table, $bulk);
@@ -414,7 +417,7 @@ class MongoModel extends Root
     //                       'pipeline' => $pipeline,
     //                       'cursor' => new stdClass(),
     //                     ];
-    //         $command = new MongoDB\Driver\Command($aggregate);
+    //         $command = new \MongoDB\Driver\Command($aggregate);
 
     //         $result = $this->MongoClient->executeCommand($this->db, $command);
     //     } catch (Exception $e) {
@@ -426,6 +429,7 @@ class MongoModel extends Root
 
     public function DBaggregate($pipeline, $checkDeletedRow = false, $clearResultFormat = true)
     {
+        // var_dump($pipeline);
         if ($this->error !== false) {
             return $this->sendResult();
         }
@@ -866,16 +870,16 @@ class MongoModel extends Root
     //     }
     // }
 
-    // public function convertToMongoDateTime($datetime)
-    // {
-    //     $date = new  \DateTime($datetime, new  \DateTimeZone('Asia/Jakarta'));
-    //     $tz = new  \DateTimeZone('UTC');
+    public function convertToMongoDateTime($datetime)
+    {
+        $date = new  \DateTime($datetime, new  \DateTimeZone('Asia/Jakarta'));
+        $tz = new  \DateTimeZone('UTC');
 
-    //     $date->setTimeZone($tz);
-    //     $timestamp = $date->format('U');
+        $date->setTimeZone($tz);
+        $timestamp = $date->format('U');
 
-    //     return new  \MongoDB\BSON\UTCDateTime($timestamp * 1000);
-    // }
+        return new  \MongoDB\BSON\UTCDateTime($timestamp * 1000);
+    }
 
     // public function setCurrentUser($userId)
     // {

@@ -9,18 +9,22 @@ use App\Services\JwtToken;
 class Controller extends Root
 {
     public $authData = [];
+    public $clientRequest;
+    public $postBody;
     public static function __callStatic($name, $arguments)
     {
         $args = null;
+        // var_dump($arguments);
         if(isset($arguments[0])){
             $args = $arguments[0];
         }
-        return (new Controller($arguments[0]))->$name();
+        return (new Controller($args))->$name();
     }
 
     public function __construct($args)
     {
-       
+        $this->clientRequest = Swoole\request();
+        $this->postBody = Swoole\raw();
         if(is_array($args) && isset($args['auth'])){
             $this->checkAuth();
         }
@@ -29,7 +33,8 @@ class Controller extends Root
 
     
     private function checkAuth(){
-        $headers = Swoole\request()->header;
+        $headers = $this->clientRequest->header;
+
         $isAuthAvailable = isset($headers['authorization']) || isset($headers['Authorization']);
         if(!$isAuthAvailable){
             $this->sendResponse(['error'=> 'unauthorized'], 401);
@@ -46,5 +51,28 @@ class Controller extends Root
             }
         };
         
+    }
+    
+    #@override
+    public function runResponse($val){
+    
+        if(is_array($val)){
+            if(isset($val['response']) && isset($val['code']) && is_numeric($val['code'])){
+                return $this->sendResponse($val['response'], $val['code']);
+            }
+        } 
+        
+        return $this->sendResponse(['val'=> $val], 200);
+    }
+
+    public function createResponse(array $val, int $code){
+        return ['response'=>$val, 'code'=> $code];
+    }
+    
+    public function checkArraySpecs(array $arrayNeeded, array $Arrays){
+        foreach($arrayNeeded as $val){
+            if(!isset($Arrays[$val])) return false;
+        }
+        return true;
     }
 }

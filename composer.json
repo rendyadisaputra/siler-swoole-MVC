@@ -16,7 +16,8 @@
     "webonyx/graphql-php": "^v14.1",
     "twig/twig": "^3.2",
     "monolog/monolog": "^2.2",
-    "firebase/php-jwt": "dev-master"
+    "firebase/php-jwt": "dev-master",
+    "phpfastcache/phpfastcache": "^8.0"
   },
   "require-dev": {
     "swoole/ide-helper": "^4.5"
