@@ -55,4 +55,13 @@ $handler = function ($req, $res) use (&$router) {
     }
 };
 
-Swoole\http($handler, 9501)->start();
+$server = Swoole\http($handler, 9501);
+$server->set([
+    'enable_static_handler' => true,
+    'document_root' => __DIR__ . '/public',
+    'upload_tmp_dir' => __DIR__ . '/public/tmp/',
+    'package_max_length' => 1 * 1024*1024,
+    'pid_file' => __DIR__.'/priv/server.pid',
+]);
+
+$server->start();
