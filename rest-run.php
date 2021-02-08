@@ -50,7 +50,7 @@ $handler = function ($req, $res) use (&$router) {
          * $e->getMessage(), $e->getTrace()
          */
 
-        var_dump( $e->getMessage(), json_encode($e->getTrace()[0]), JSON_PRETTY_PRINT);
+        var_dump($e->getMessage(), json_encode($e->getTrace()[0]), JSON_PRETTY_PRINT);
         Swoole\json(['Error' => 'Something is wrong broh.. '], 500);
     }
 };
@@ -58,9 +58,9 @@ $handler = function ($req, $res) use (&$router) {
 $server = Swoole\http($handler, 9501);
 $server->set([
     'enable_static_handler' => true,
-    'document_root' => __DIR__ . '/public',
-    'upload_tmp_dir' => __DIR__ . '/public/tmp/',
-    'package_max_length' => 1 * 1024*1024,
+    'document_root' => __DIR__.'/public',
+    'upload_tmp_dir' => __DIR__.'/public/tmp',
+    'package_max_length' => 1 * 1024 * 1024,
     'pid_file' => __DIR__.'/priv/server.pid',
 ]);
 

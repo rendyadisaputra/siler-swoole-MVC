@@ -16,4 +16,5 @@ go to command line
 ## Example of REST API
 ```
 GET http://192.168.56.66:9501/members
+POST http://192.168.56.66:9501/members
 ```
