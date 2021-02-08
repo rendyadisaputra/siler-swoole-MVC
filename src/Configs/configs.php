@@ -10,13 +10,14 @@ define('FILE_UPLOAD_DIR', __DIR__.'/../../public/images/');
 define('URL_HOST', 'http://192.168.56.66:9501/');
 
 define('SMTP_SET', '
-{
-    "SMTPDebug" : 1;  
-    "SMTPAuth"   : true;
-    "SMTPSecure" : "tls";
-    "Port"       : 587;
-    "Host"       : "smtp.gmail.com";
-    "Username"   : "your-email@gmail.com";
-    "Password"   : "your-gmail-password";
+{"SMTPDebug" : 1,
+    "SMTPAuth"   : true,
+    "SMTPSecure" : "tls",
+    "Port"       : 587,
+    "Host"       : "smtp.gmail.com",
+    "Username"   : "rendyadisaputra@gmail.com",
+    "Password"   : "b15m1ll@h",
+    "email"      : "rendyadisaputra@gmail.com",
+    "name"       : "rendy"
 }
 ');
