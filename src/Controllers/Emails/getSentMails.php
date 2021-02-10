@@ -1,9 +1,8 @@
 <?php
 
-
 use App\Models\MongoModel;
 
-$getEmails = function ($resp) {
+$getSentMails = function ($resp) {
     $filterQuery = $resp->clientRequest->get;
 
     $EmailsModel = MongoModel::EmailsModel();

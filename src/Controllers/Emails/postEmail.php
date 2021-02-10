@@ -8,9 +8,9 @@ $postEmail = function ($C) {
 
     //get SMTP Set from SMTP JSON
     $smtpSet = json_decode(SMTP_SET, 1);
-    $toEmail = "rendyadisaputra@gmail.com";
+    $toEmail = "rendyadisaputra@outlook.com";
     $toName  = "rendy";
-    $subject = "say hello email";
+    $subject = "Second test ";
     $htmlContent = "<strong> hi </strong> <em> broh </em>, I just wanna say thank u";
 
     $sendEmail = EmailService::set($smtpSet)->send($toEmail, $toName, $subject, $htmlContent);
