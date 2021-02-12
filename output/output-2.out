@@ -1,0 +1,431 @@
+http://192.168.56.66:9501/emails/templates?hashtags=test
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.172 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    853.38 [#/sec] (mean)
+Time per request:       117.181 [ms] (mean)
+Time per request:       1.172 [ms] (mean, across all concurrent requests)
+Transfer rate:          541.70 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   3.0      0      11
+Processing:     8  111  19.1    115     131
+Waiting:        6  111  19.2    115     131
+Total:         15  112  17.1    116     138
+
+Percentage of the requests served within a certain time (ms)
+  50%    116
+  66%    117
+  75%    119
+  80%    120
+  90%    127
+  95%    128
+  98%    130
+  99%    131
+ 100%    138 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.131 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    884.49 [#/sec] (mean)
+Time per request:       113.059 [ms] (mean)
+Time per request:       1.131 [ms] (mean, across all concurrent requests)
+Transfer rate:          561.44 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.8      0       7
+Processing:     7  107  21.5    111     126
+Waiting:        7  107  21.5    111     126
+Total:         12  108  20.0    111     126
+
+Percentage of the requests served within a certain time (ms)
+  50%    111
+  66%    113
+  75%    114
+  80%    117
+  90%    122
+  95%    123
+  98%    124
+  99%    124
+ 100%    126 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.111 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    899.75 [#/sec] (mean)
+Time per request:       111.142 [ms] (mean)
+Time per request:       1.111 [ms] (mean, across all concurrent requests)
+Transfer rate:          571.13 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.9      0       8
+Processing:     7  105  20.8    110     120
+Waiting:        7  105  20.8    110     120
+Total:         12  106  19.2    110     120
+
+Percentage of the requests served within a certain time (ms)
+  50%    110
+  66%    112
+  75%    115
+  80%    116
+  90%    117
+  95%    118
+  98%    118
+  99%    119
+ 100%    120 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.105 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    904.87 [#/sec] (mean)
+Time per request:       110.513 [ms] (mean)
+Time per request:       1.105 [ms] (mean, across all concurrent requests)
+Transfer rate:          574.38 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.7      0       7
+Processing:     6  105  20.7    110     121
+Waiting:        6  105  20.7    110     121
+Total:         11  105  19.3    110     121
+
+Percentage of the requests served within a certain time (ms)
+  50%    110
+  66%    111
+  75%    112
+  80%    113
+  90%    115
+  95%    119
+  98%    120
+  99%    120
+ 100%    121 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.115 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    896.93 [#/sec] (mean)
+Time per request:       111.492 [ms] (mean)
+Time per request:       1.115 [ms] (mean, across all concurrent requests)
+Transfer rate:          569.34 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.7      0       7
+Processing:     7  105  21.0    110     128
+Waiting:        7  105  21.0    110     128
+Total:         12  106  19.7    110     128
+
+Percentage of the requests served within a certain time (ms)
+  50%    110
+  66%    112
+  75%    112
+  80%    113
+  90%    121
+  95%    124
+  98%    125
+  99%    126
+ 100%    128 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.101 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    908.62 [#/sec] (mean)
+Time per request:       110.057 [ms] (mean)
+Time per request:       1.101 [ms] (mean, across all concurrent requests)
+Transfer rate:          576.76 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.7      0       7
+Processing:     7  104  19.8    110     114
+Waiting:        6  104  19.8    110     114
+Total:         12  105  18.4    110     114
+
+Percentage of the requests served within a certain time (ms)
+  50%    110
+  66%    110
+  75%    111
+  80%    111
+  90%    112
+  95%    113
+  98%    113
+  99%    113
+ 100%    114 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.099 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    910.22 [#/sec] (mean)
+Time per request:       109.864 [ms] (mean)
+Time per request:       1.099 [ms] (mean, across all concurrent requests)
+Transfer rate:          577.78 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.8      0       8
+Processing:     7  104  19.8    109     115
+Waiting:        7  104  19.8    109     114
+Total:         12  105  18.4    109     115
+
+Percentage of the requests served within a certain time (ms)
+  50%    109
+  66%    110
+  75%    111
+  80%    111
+  90%    112
+  95%    114
+  98%    114
+  99%    114
+ 100%    115 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.122 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    891.02 [#/sec] (mean)
+Time per request:       112.231 [ms] (mean)
+Time per request:       1.122 [ms] (mean, across all concurrent requests)
+Transfer rate:          565.59 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.8      0       7
+Processing:     7  106  21.6    111     128
+Waiting:        6  106  21.6    111     128
+Total:         12  107  20.1    111     128
+
+Percentage of the requests served within a certain time (ms)
+  50%    111
+  66%    113
+  75%    114
+  80%    116
+  90%    119
+  95%    125
+  98%    127
+  99%    127
+ 100%    128 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.100 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    909.50 [#/sec] (mean)
+Time per request:       109.951 [ms] (mean)
+Time per request:       1.100 [ms] (mean, across all concurrent requests)
+Transfer rate:          577.32 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.7      0       7
+Processing:     7  104  20.5    111     116
+Waiting:        7  104  20.5    111     116
+Total:         12  105  19.1    111     116
+
+Percentage of the requests served within a certain time (ms)
+  50%    111
+  66%    111
+  75%    111
+  80%    112
+  90%    112
+  95%    114
+  98%    114
+  99%    116
+ 100%    116 (longest request)
+http://192.168.56.66:9501/emails/templates?hashtags=test
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.56.66 (be patient)
+
+
+Server Software:        Swiler
+Server Hostname:        192.168.56.66
+Server Port:            9501
+
+Document Path:          /emails/templates?hashtags=test
+Document Length:        328 bytes
+
+Concurrency Level:      100
+Time taken for tests:   1.105 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      650000 bytes
+HTML transferred:       328000 bytes
+Requests per second:    904.67 [#/sec] (mean)
+Time per request:       110.538 [ms] (mean)
+Time per request:       1.105 [ms] (mean, across all concurrent requests)
+Transfer rate:          574.25 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.8      0       7
+Processing:     7  105  20.2    110     115
+Waiting:        6  105  20.2    110     115
+Total:         11  105  18.8    110     115
+
+Percentage of the requests served within a certain time (ms)
+  50%    110
+  66%    111
+  75%    112
+  80%    112
+  90%    113
+  95%    114
+  98%    115
+  99%    115
+ 100%    115 (longest request)

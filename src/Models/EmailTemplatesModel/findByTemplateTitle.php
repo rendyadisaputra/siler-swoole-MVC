@@ -6,7 +6,7 @@ $findByTemplateTitle = function ($mongoModel, $args = null) {
             [
                 '$match'=> [
                 'title' => $title
-            ]
+                ]
         ]
     ]);
     return $getData['result'];

@@ -11,76 +11,7 @@ $findEmailTemplates = function ($mongoModel, $args) {
 
     $pipeline = [
         [
-            '$match' => [
-                'rules_group' => [
-                    '$exists' => true,
-                ],
-            ],
-        ],
-        [
-            '$lookup' => [
-                'from' => 'Auth_rules_group',
-                'let' => [
-                    'list_group' => '$rules_group',
-                ],
-                'pipeline' => [
-                    [
-                        '$match' => [
-                            '$expr' => [
-                                '$and' => [
-                                    [
-                                        '$in' => [
-                                            '$_id',
-                                            '$$list_group',
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                    [
-                        '$project' => [
-                            'description' => 1,
-                            'name' => 1,
-                            'route' => 1,
-                            'rules' => 1,
-                        ],
-                    ],
-                    [
-                        '$match' => [
-                            'rules' => [
-                                '$exists' => true,
-                            ],
-                        ],
-                    ],
-                    [
-                        '$lookup' => [
-                            'from' => 'Auth_rules',
-                            'let' => ['list_of_rules' => '$rules'],
-                            'pipeline' => [
-                                    [
-                                        '$match' => [
-                                            '$expr' => [
-                                                '$and' => [
-                                                    ['$in' => ['$_id', '$$list_of_rules']],
-                                                ],
-                                            ],
-                                        ],
-                                    ],
-                                    [
-                                        '$project' => [
-                                            'description' => 1,
-                                            'name' => 1,
-                                            'route' => 1,
-                                        ],
-                                    ],
-                                ],
-                            'as' => 'rules',
-                        ],
-                    ],
-                ],
-                'as' => 'rules_group',
-            ],
+            '$match' => [],
         ],
     ];
 

@@ -1,4 +1,6 @@
-for i in {1..5}
+echo $1
+for i in {1..10}
 do
-  ab -n 1000 -c 100 http://192.168.56.66:9501/
+  echo $1;
+  ab -n 1000 -c 100 $1
 done

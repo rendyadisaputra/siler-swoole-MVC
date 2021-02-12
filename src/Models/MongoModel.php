@@ -28,6 +28,10 @@ use App\Root;
  * }
  * ```
  */
+use function App\Functions\getGlobalVar;
+use function App\Functions\setGlobalVar;
+
+
 class MongoModel extends Root
 {
     public $MongoClient = false;
@@ -46,7 +50,12 @@ class MongoModel extends Root
 
     public function __construct()
     {
-        $this->MongoClient = new \MongoDB\Driver\Manager(MONGODB_HOST);
+        $MongoClient = getGlobalVar('MongoClient');
+        if(is_null($MongoClient)){
+            $MongoClient = new \MongoDB\Driver\Manager(MONGODB_HOST);
+            setGlobalVar('MongoClient', $MongoClient);
+        }
+        // $this->MongoClient = new \MongoDB\Driver\Manager(MONGODB_HOST);
 
         return parent::__construct(__DIR__);
     }
@@ -465,8 +474,9 @@ class MongoModel extends Root
                         ];
             $command = new  \MongoDB\Driver\Command($aggregate);
 
+            $MongoClient = getGlobalVar('MongoClient');
             // var_dump($this->collectionName);
-            $result = $this->MongoClient->executeCommand($this->selectedDB, $command);
+            $result = $MongoClient->executeCommand($this->selectedDB, $command);
         } catch (\Throwable $e) {
             // var_dump('HELLO ERROR', $e);
 

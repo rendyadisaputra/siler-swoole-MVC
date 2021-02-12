@@ -3,6 +3,8 @@
 namespace App;
 
 use Siler\Swoole;
+use function App\Functions\getGlobalVar;
+use function App\Functions\setGlobalVar;
 
 class Root
 {
@@ -24,9 +26,12 @@ class Root
         } elseif ($this->calledClass != '') {
             $file = ($this->dir).'/'.($this->calledClass).'/'.$name.'.php';
             if (is_file($file)) {
-                include $file;
-                
-                return $this->runResponse($$name($this, $arguments));
+                $glob = getGlobalVar($file);
+                if(is_null($glob)){
+                    include_once $file;
+                    $glob = setGlobalVar($file, $$name);
+                }
+                return $this->runResponse($glob($this, $arguments));
             } else {
                 Swoole\json('function file not found '.($file), 501);
             }

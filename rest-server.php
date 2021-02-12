@@ -17,6 +17,29 @@ if ($client != null) {
 }
 $log = null;
 $router = [];
+
+function sendResponse($value, int $code = 200, $response = 'json'): void
+{
+    $headers = [
+        'Access-Control-Allow-Origin'=> '*',
+        'Access-Control-Allow-Headers'=>'Content-Type, Authorization, authorization, api_key',
+        'Access-Control-Allow-Methods'=> 'GET, POST, OPTIONS, PUT, DELETE',
+        'Server' => 'Swiler'
+    ];
+    
+    if ($response == 'json' && is_array($value)) {
+        if(isset($value['code'])){
+            $code = $value['code'];
+            unset($value['code']);
+        }
+        Swoole\json($value, $code , $headers);
+    } elseif ($response == 'json' && ( is_string($value) || is_bool($value) || is_numeric($value) )) {
+        Swoole\json(['return'=> $value], $code , $headers);
+    } else {
+        Swoole\emit($value, $code , $headers);
+    }
+}
+
 $handler = function ($req, $res) use (&$router) {
     // Route\files('src/Routings');
     $dir = __DIR__.'/src/Routings/';
@@ -24,25 +47,34 @@ $handler = function ($req, $res) use (&$router) {
     $parseSlice = trim($req->server['request_uri'], '/');
     $fileExt1 = $dir.$parseSlice.'.'.($requestMethod).'.php';
     $fileExt2 = $dir.($parseSlice == '' ? '' : $parseSlice.'/').'index'.'.'.($requestMethod).'.php';
-
+    $req->postBody = Swoole\raw();
     try {
+        $resp = null;
         if (is_file($fileExt1)) {
             if (!isset($router[$fileExt1])) {
                 include_once $fileExt1;
                 $router[$fileExt1] = $run;
             }
 
-            $router[$fileExt1]();
+            $resp = $router[$fileExt1]($req, $resp);
+            if(!is_null($resp)){
+                sendResponse($resp);
+            }
         } elseif (is_file($fileExt2)) {
             if (!isset($router[$fileExt2])) {
                 include_once $fileExt2;
                 $router[$fileExt2] = $run;
             }
 
-            $router[$fileExt2]();
-        } else {
+            $resp = $router[$fileExt2]($req, $resp);
+            if(!is_null($resp)){
+                sendResponse($resp);
+            }
+        }
+        else {
             Swoole\emit('Not found', 404);
         }
+       
     } catch (Exception $e) {
         /*
          * Logging error is here
@@ -55,13 +87,14 @@ $handler = function ($req, $res) use (&$router) {
     }
 };
 
-$server = Swoole\http($handler, 9501);
+$server = Swoole\http($handler, $port = 9501);
 $server->set([
     'enable_static_handler' => true,
     'document_root' => __DIR__.'/public',
     'upload_tmp_dir' => __DIR__.'/public/tmp',
     'package_max_length' => 1 * 1024 * 1024,
     'pid_file' => __DIR__.'/priv/server.pid',
+    'worker_num' => 100,
 ]);
 
 $server->start();

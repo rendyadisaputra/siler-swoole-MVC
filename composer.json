@@ -18,14 +18,16 @@
     "monolog/monolog": "^2.2",
     "firebase/php-jwt": "dev-master",
     "phpfastcache/phpfastcache": "^8.0",
-    "phpmailer/phpmailer": "^6.2"
+    "phpmailer/phpmailer": "^6.2",
+    "mongodb/mongodb": "^1.5"
   },
   "require-dev": {
     "swoole/ide-helper": "^4.5"
   },
   "autoload": {
     "files": [
-      "src/create_resolvers.php"
+      "src/Functions/general-functions.php",
+      "src/Configs/autoloader-functions.php"
     ],
     "psr-4": {
       "App\\": "src/"
