@@ -45,14 +45,18 @@ $handler = function ($req, $res) use (&$router) {
     $dir = __DIR__.'/src/Routings/';
     $requestMethod = strtolower($req->server['request_method']);
     $parseSlice = trim($req->server['request_uri'], '/');
-    $fileExt1 = $dir.$parseSlice.'.'.($requestMethod).'.php';
-    $fileExt2 = $dir.($parseSlice == '' ? '' : $parseSlice.'/').'index'.'.'.($requestMethod).'.php';
+    $fileExt1 = realpath($dir.$parseSlice.'.'.($requestMethod).'.php');
+    $fileExt2 = realpath($dir.($parseSlice == '' ? '' : $parseSlice.'/').'index'.'.'.($requestMethod).'.php');
     $req->postBody = Swoole\raw();
     try {
         $resp = null;
         if (is_file($fileExt1)) {
             if (!isset($router[$fileExt1])) {
                 include_once $fileExt1;
+                if(!isset($run)){
+                    Swoole\emit('Not found', 404);
+                    return false;
+                }
                 $router[$fileExt1] = $run;
             }
 
@@ -63,16 +67,22 @@ $handler = function ($req, $res) use (&$router) {
         } elseif (is_file($fileExt2)) {
             if (!isset($router[$fileExt2])) {
                 include_once $fileExt2;
+                if(!isset($run)){
+                    Swoole\emit('Not found', 404);
+                    return false;
+                }
                 $router[$fileExt2] = $run;
             }
 
             $resp = $router[$fileExt2]($req, $resp);
             if(!is_null($resp)){
                 sendResponse($resp);
+                return true;
             }
         }
         else {
             Swoole\emit('Not found', 404);
+            return false;
         }
        
     } catch (Exception $e) {
@@ -84,6 +94,7 @@ $handler = function ($req, $res) use (&$router) {
 
         var_dump($e->getMessage(), json_encode($e->getTrace()[0]), JSON_PRETTY_PRINT);
         Swoole\json(['Error' => 'Something is wrong broh.. '], 500);
+        return false;
     }
 };
 
@@ -94,7 +105,7 @@ $server->set([
     'upload_tmp_dir' => __DIR__.'/public/tmp',
     'package_max_length' => 1 * 1024 * 1024,
     'pid_file' => __DIR__.'/priv/server.pid',
-    'worker_num' => 100,
+    'worker_num' => 200,
 ]);
 
 $server->start();

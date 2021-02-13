@@ -3,3 +3,4 @@ composer.phar
 /public/
 /priv/
 /src/Configs/configs.php
+output

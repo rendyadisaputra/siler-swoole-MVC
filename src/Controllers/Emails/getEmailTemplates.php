@@ -13,7 +13,7 @@ $getEmailTemplates = function ($resp) {
         $filterQuery['_id'] = $filterQuery['id'];
         unset($filterQuery['id']);
     }
-    // var_dump("MongoModelFunc", );
+    
     $EmailsData = DBAggregate([], 'Email_templates', 'chitatoz');
     // $EmailsData = $EmailsModel->findEmailTemplates($filterQuery);
     // var_dump($BookModel->table);

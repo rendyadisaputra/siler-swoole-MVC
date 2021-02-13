@@ -8,7 +8,10 @@
  * ?slug=no-slug
  */
 use App\Functions\Controllers\EmailTemplates;
+use App\Functions\Controllers\Auth;
 
 $run = function ($req, $resp) { 
-    return EmailTemplates\getEmailTemplates($req, $resp); 
+    $modifiedReq = $req;
+    return (!Auth\checkValidation($modifiedReq)) ? 
+        $modifiedReq->errorResponse : EmailTemplates\getEmailTemplates($modifiedReq, $resp) ;
 };

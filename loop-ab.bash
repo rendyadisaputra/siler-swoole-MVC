@@ -2,5 +2,5 @@ echo $1
 for i in {1..10}
 do
   echo $1;
-  ab -n 1000 -c 100 $1
+  ab -n 1000 -c 100 -H "Authorization:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MTMxMjAyNTgsImp0aSI6Im1yZDJpbndqakI1aXJ0NjY3cnArOGpKdFJEaUVWVFIwemlIektUOE5aYmc9IiwiaXNzIjoic3dvb2xlLWFwaSIsIm5iZiI6MTYxMzEyMDI2MSwiZXhwIjoxNjEzMjA2NjYxLCJkYXRhIjp7InVzZXJOYW1lIjoiZ3Vlc3QtMTYxMzEyMDI1ODkyMDc4MzgyMiIsInJvbGVzIjoiZ3Vlc3QifX0.ZKAAQz0WEjZrCAn7XT-9sm9so085pN_4iu6EK6a0KRE" $1
 done

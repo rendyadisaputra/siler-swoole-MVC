@@ -2,5 +2,10 @@
 /**
  * GET /members/ | Get data books.
  */
-$run = function () {App\Controllers\Controller::Auth()->guestLogin(); };
+
+use App\Functions\Controllers\Auth;
+
+$run = function () {
+    App\Controllers\Controller::Auth()->guestLogin(); 
+};
 
