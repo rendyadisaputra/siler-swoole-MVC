@@ -7,11 +7,11 @@ use App\Functions;
 use App\Functions\Model\RolesModel;
 
 
-function checkValidation(&$req){
+function checkValidation(&$req, $onSuccesCallback){
     
     if(!isset($req->header['authorization'])){
         $req->errorResponse = Controller\errorResponse("Unauthorized access", 401);
-        return false;
+        return  $req->errorResponse;
     }
     
     $decData = null;
@@ -25,17 +25,18 @@ function checkValidation(&$req){
 
         if($isAuthorized == false){
             $req->errorResponse = Controller\errorResponse("Unauthorized access. fail routes", 401);
-            return false;
+            return $req->errorResponse;
         }
 
     } finally {
+        
         if($decData==null){
             $req->errorResponse = Controller\errorResponse("Unauthorized access. Invalid or expired token", 401);
-            return false;
+            return $req->errorResponse;
         }
     }
     
-    
-    return true;
+   
+    return $onSuccesCallback();
 }
 

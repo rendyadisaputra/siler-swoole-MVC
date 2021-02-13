@@ -12,6 +12,9 @@ use App\Functions\Controllers\Auth;
 
 $run = function ($req, $resp) { 
     $modifiedReq = $req;
-    return (!Auth\checkValidation($modifiedReq)) ? 
-        $modifiedReq->errorResponse : EmailTemplates\getEmailTemplates($modifiedReq, $resp) ;
+    return Auth\checkValidation($modifiedReq, 
+        function() use ($modifiedReq, $resp) {
+            return EmailTemplates\getEmailTemplates($modifiedReq, $resp) ;
+            }
+        );
 };

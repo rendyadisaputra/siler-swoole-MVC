@@ -1,5 +1,7 @@
 <?php
 
+/** you can copy it and use it as configs.php */
+
 declare(strict_types=1);
 define('TCP_HOST', '192.168.56.66');
 define('TCP_PORT', 9502);
@@ -21,3 +23,5 @@ define('SMTP_SET', '
     "name"       : "your name"
 }
 ');
+
+define('DB_NAME', 'chitatoz');
