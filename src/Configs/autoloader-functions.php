@@ -1,5 +1,8 @@
 <?php
 $globalArray = [];
+$globalHit = [];
+$table = new Swoole\Table(1024);
+
 function include_dir_r( $dir_path ) {
     $path = realpath( $dir_path );
     $objects = new \RecursiveIteratorIterator( new \RecursiveDirectoryIterator( $path ), \RecursiveIteratorIterator::SELF_FIRST );

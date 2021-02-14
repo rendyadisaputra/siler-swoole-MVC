@@ -12,6 +12,7 @@ use App\Functions\Controllers\Auth;
 
 $run = function ($req, $resp) { 
     $modifiedReq = $req;
+    $modifiedReq->multiHitProtection = true;
     return Auth\checkValidation($modifiedReq, 
         function() use ($modifiedReq, $resp) {
             return EmailTemplates\getEmailTemplates($modifiedReq, $resp) ;

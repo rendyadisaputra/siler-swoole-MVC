@@ -21,7 +21,6 @@ function getEmailTemplates($req, $resp){
         $key = $req->server['request_method'].
             $req->server['request_uri'].
             $req->server['query_string'];
-
         $EmailsData = InternalCacher\get($key, 
             function() use ($filterQuery){
                 return EmailTemplatesModel\findEmailTemplates($filterQuery);

@@ -41,8 +41,13 @@ function sendResponse($value, int $code = 200, $response = 'json'): void
     }
 }
 
-$handler = function ($req, $res) use (&$router) {
+$table = new \Swoole\Table(1024*1024);
+$table->column('value', \Swoole\Table::TYPE_STRING, 500);
+$table->create();
+
+$handler = function ($req, $res) use (&$router, $table) {
     // Route\files('src/Routings');
+    $req->table = $table;
     $dir = __DIR__.'/src/Routings/';
     $requestMethod = strtolower($req->server['request_method']);
     $parseSlice = trim($req->server['request_uri'], '/');
@@ -111,5 +116,8 @@ $server->set([
     'pid_file' => __DIR__.'/priv/server.pid',
     'worker_num' => 200,
 ]);
+
+
+
 
 $server->start();
